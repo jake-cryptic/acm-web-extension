@@ -1,0 +1,22 @@
+{
+	"manifest_version":2,
+
+	"name":"Awesome Cell Mapper",
+	"short_name":"Awesome CM",
+  	"author":"AbsoluteDouble",
+	"description":"Slight tweaks to the cellmapper map",
+	"minimum_chrome_version":"8",
+	"version":"1.1.4",
+
+	"permissions": [
+		"storage",
+	  	"tabs"
+	],
+  	"content_scripts":[
+	  	{
+			"js":["jquery.js","page.js"],
+			"css":["new.css"],
+			"matches":["https://*.www.cellmapper.net/map*","http://*.www.cellmapper.net/map*"]
+		}
+	]
+}

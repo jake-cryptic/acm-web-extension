@@ -1,0 +1,142 @@
+table {
+	box-shadow:none !important;
+	color:#fff !important;
+}
+#tabs-1 table{
+	margin:0 0 0% 0 !important;
+	background-color:rgba(0,0,0,0.3) !important;
+}
+#tabs-2 table{
+	margin: 1% 0 1.5% 0 !important;
+	background-color:rgba(0,0,0,0.3) !important;
+}
+table thead {
+	background-color:rgba(40,40,40,0.9) !important;
+	cursor:pointer !important;
+	transition:background-color ease-in-out .2s !important;
+}
+table thead:hover {
+	background-color:rgba(60,60,60,0.8) !important;
+}
+#feedLink {display:none;}
+table thead tr td, table thead tr th {
+	font-size:1.2em !important;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+	background-color:rgba(45,45,45,0.6) !important;
+	color: #ffffff !important;
+}
+.table-striped tbody tr:nth-of-type(even) {
+	background-color:rgba(100,100,100,0.6) !important;
+	color: #ffffff !important;
+}
+.table th, .table td {
+	padding:.2rem !important;
+}
+.table th, .table td {
+	border-top:none !important;
+}
+.btn-info{
+	background-color:#363636 !important;
+	border-color:#ffffff !important;
+}
+.p-3 {
+	padding:.1rem !important;
+}
+a:not([href]):not([tabindex]){color:#1a1a1a !important;}
+.caretIcon{display:none !important;}
+a{
+	color:#13a8ff;
+	font-style: italic !important;
+}
+a.chosen-single span{
+	font-style:none !important;
+}
+#linkback_table{display:none;}
+#tabsList a {
+	font-style:none !important;
+}
+table tbody a:visited{
+	color:#a8a3ff !important;
+}
+#side_bottom {
+	background-color:rgba(34,34,34,0.7) !important;
+}
+.span_button {
+	transition:.2s color ease-in-out,.2s background-color ease-in-out !important;
+	color:#fff !important;
+	background-color:#1a1a1a !important;
+}
+.span_button:hover {
+	color:#1a1a1a !important;
+	background-color:#cacaca !important;
+}
+#select_provider_table tbody tr td {
+	font-size:1.1em !important;
+}
+#linkback {
+	width:100% !important;
+}
+.modal-content {
+	background-color: rgba(0,0,0,0.7) !important;
+	color:#fff !important;
+}
+.modal .close {
+	color: #fff !important;
+}
+.ui-dialog-title {
+	font-size:1.1em !important;
+}
+.ui-widget-header {
+	color:#fff !important;
+	background:rgba(0,0,0,0.6) !important;
+	border: 1px solid #aaaaaa !important;
+}
+.ui-dialog {
+	color:#fff !important;
+	background:rgba(0,0,0,0.9) !important;
+	font-size:1.1em !important;
+}
+.ui-dialog div{
+	color:#fff !important;
+	background:none !important;
+}
+.ui-dialog a{
+	color:#cecece !important;
+}
+.ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl{
+	border-top-left-radius:0 !important;
+	border-top-right-radius:0 !important;
+	border-bottom-left-radius:0 !important;
+	border-bottom-right-radius:0 !important;
+}
+.ui-widget-overlay {
+    background:#000 !important;
+    opacity:.6 !important;
+}
+.ui-button{
+	background:none !important;
+}
+.ui-widget.ui-widget-content{
+	border:0 !important;
+}
+fieldset label {
+	font-size:1.1em;
+}
+button.ui-button{
+	color:#000 !important;
+	background:#eaeaea !important;
+	transition:.2s color ease-in-out,.2s background ease-in-out;
+}
+button.ui-button:hover{
+	color:#eaeaea !important;
+	background:#1a1a1a !important;
+}
+.labels {
+    color: #6c0fc2;
+    background-color: rgba(255,255,255,0.7);
+    font-size: 9.5px;
+}
+.bg-primary {
+	background-color: #000000 !important;
+}
