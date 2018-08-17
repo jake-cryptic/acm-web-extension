@@ -77,6 +77,9 @@ table tbody a:visited{
 #linkback {
 	width:100% !important;
 }
+.chosen-container-single a:not([href]):not([tabindex]).chosen-single:not(.chosen-default) {
+	color:#525252 !important;
+}
 .modal-content {
 	background-color: rgba(0,0,0,0.7) !important;
 	color:#fff !important;
