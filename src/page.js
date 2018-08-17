@@ -166,6 +166,30 @@ var improvements = function(){
 			).insertAfter("#accountTable");
 		};
 		
+		var acm_collapseAll = function(){
+			var callback = function(mutationsList) {
+				if ($("#acm_collapse_el").length === 0){
+					$("#tabs-2").prepend(
+						$("<br/>"),
+						$("<table/>",{"class":"table table-sm","id":"acm_collapse_el"}).append(
+							$("<thead/>").append(
+								$("<tr/>",{"class":"collapsedSection"}).append(
+									$("<td/>").text("Toggle All Sections")
+								).on("click enter",function(){
+									$("#tabs-2 tbody").each(function(){
+										$(this).toggle();
+									})
+								})
+							)
+						)
+					);
+				}
+			};
+
+			var observer = new MutationObserver(callback);
+			observer.observe(document.getElementById('tabs-2'), { attributes: true, childList: true, subtree: true });
+		};
+		
 		var acm_welcomeMsg = function(){
 			var text = "<h2>Welcome!</h2>Thanks for installing AwesomeCM.<br />If you have any ideas or suggestions DM me on Telegram or Twitter<br /><a href='https://t.me/underrscore'>Telegram</a> | <a href='https://twitter.com/AD_couk'>Twitter</a><br /><a href='https://github.com/jake-cryptic/acm-web-extension'>View code on GitHub</a>";
 			var realDiv = $("<div>");
@@ -173,7 +197,7 @@ var improvements = function(){
 			realDiv.prop('title', 'Awesome CellMapper');
 			bootbox.alert(text);
 			window.location.hash = "#";
-		}
+		};
 
 		if(window.location.pathname === "/map"){
 			$("#tabs-1").find("br").remove();
@@ -183,6 +207,7 @@ var improvements = function(){
 			acm_initialiseColourData();
 			acm_initialiseColourSelector();
 			acm_toggleTopBar();
+			acm_collapseAll();
 			if(window.location.hash && window.location.hash === "#newinstall") {acm_welcomeMsg();}
 		}
 	},null);
