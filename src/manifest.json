@@ -7,7 +7,7 @@
 	"description":"Slight tweaks to the cellmapper map",
 	"minimum_chrome_version":"8",
   	"incognito":"spanning",
-	"version":"1.2.3",
+	"version":"1.2.4",
 
 	"permissions": [
 		"storage",
