@@ -4,11 +4,23 @@
 	"name":"Awesome Cell Mapper",
 	"short_name":"Awesome CM",
   	"author":"AbsoluteDouble",
-	"description":"Slight tweaks to the cellmapper map",
+	"description":"Tweaks to the cellmapper.net map, adds dark more, option to change EARFCN colours and other useful features.",
 	"minimum_chrome_version":"8",
   	"incognito":"spanning",
-	"version":"1.2.4",
+	"version":"1.3",
 
+	"browser_action": {
+		"default_icon": {
+		  	"32": "acm_32.png",
+		  	"64": "acm_64.png"
+		},
+		"default_title": "Open CellMapper",
+		"default_popup": "open.html"
+	},
+	"icons": {
+		"32": "acm_32.png",
+		"64": "acm_64.png"
+	},
 	"permissions": [
 		"storage",
 	  	"tabs"
