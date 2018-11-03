@@ -1,14 +1,21 @@
 $(document).ready(function(){
 	improvements();
+	newCss();
 });
 var improvements = function(){
 	inject(function(){
+		// Check for JSON so we can use it to encode/decode our data
 		if (!window.JSON){
 			var s = document.createElement("script");
 			s.src = "https://cdnjs.cloudflare.com/ajax/libs/json3/3.3.2/json3.min.js";
 			s.type = "text/javascript";
 			document.head.append(s);
 		}
+		
+		// Define some user data variables
+		var acm_userLocations = {
+			"locations":{}
+		};
 		var acm_sectColours = {
 			"LTE":{},
 			"UMTS":{},
@@ -65,6 +72,7 @@ var improvements = function(){
 		var acm_saveUserData = function(only){
 			if (!only) var only = "all";
 			
+			
 			if (typeof window.acm_sectColours !== "object" && (only === "colordata-v01" || only === "all")) {
 				window.acm_sectColours = {
 					"LTE":{},
@@ -76,12 +84,19 @@ var improvements = function(){
 				window.acm_userSettings = {
 					"hideNavBar":false,
 					"hiddenSections":[],
-					"packCellData":false
+					"packCellData":false,
+					"useCustomCss":true
+				};
+			}
+			if (typeof window.acm_userLocations !== "object" && (only === "locdata-v01" || only === "all")) {
+				window.acm_userLocations = {
+					"locations":{}
 				};
 			}
 			
 			if (only === "colordata-v01" || only === "all") localStorage.setItem("colordata-v01",JSON.stringify(window.acm_sectColours));
 			if (only === "userdata-v01" || only === "all") localStorage.setItem("userdata-v01",JSON.stringify(window.acm_userSettings));
+			if (only === "locdata-v01" || only === "all") localStorage.setItem("locdata-v01",JSON.stringify(window.acm_userLocations));
 		};
 		var acm_randomiseColourData = function(cmDefault){
 			if (!confirm((cmDefault === true ? "This will set all values to their cellmapper defaults. Are you sure you wish to do this?" : "This will randomise all current values. Are you sure you wish to do this?"))) return;
@@ -252,6 +267,38 @@ var improvements = function(){
 			).insertAfter("#accountTable");
 		};
 		
+		var acm_reloadSavedLocsUi = function(){
+			var x = $("#acm_saved_locations");
+			x.empty();
+			if (typeof window.acm_userLocations !== "object") {
+				window.acm_userLocations = {
+					"locations":{}
+				};
+			}
+			x.append(
+				$("<h4/>").text("Saved Locations"),
+				$("<button/>").on("click enter",function(){
+					
+				}).text("Save this location")
+			);
+			
+			var list = $("<div/>",{"id":"acm_locations_list"});
+			var keys = Object.keys(window.acm_userLocations.locations);
+			for (var i = 0, l = keys.length;i<l;i++){
+				console.log(window.acm_userLocations.locations[keys[i]]);
+			}
+			
+			x.append(list);
+		};
+		
+		var acm_initialiseLocationSaver = function(){
+			$("#locsearch thead tr td").text("Map Locations");
+			$("#locsearch tbody").append(
+				$("<tr/>",{"id":"acm_saved_locations"}).text("Loading Saved Locations...")
+			);
+			acm_reloadSavedLocsUi();
+		};
+		
 		var acm_collapseAll = function(){
 			var callback = function(mutationsList) {
 				/*if(mutationsList[0].addedNodes.length === 1 && mutationsList[0].type === "childList"){
@@ -294,8 +341,10 @@ var improvements = function(){
 			$("#tabs-1").find("br").remove();
 			$("#tabs-2").find("br").remove();
 			$("#notesText").html("Awesome CellMapper by <a href='https://absolutedouble.co.uk'>AbsoluteDouble</a>");
+			$("#notes").hide();
 			$("#toast").text("[AwesomeCM]: Loaded!").fadeIn(200).delay(2000).slideUp(450);
 			$("nav.navbar").css("background","#1a1a1a !important");
+			//acm_initialiseLocationSaver();
 			acm_initialiseColourData();
 			acm_initialiseColourSelector();
 			acm_toggleTopBar();
@@ -304,6 +353,23 @@ var improvements = function(){
 		}
 	},null);
 };
+
+var newCss = function(){
+	inject(function(cssUrl){
+		console.log(cssUrl);
+		var acm_injectStyles = function(){
+			var acm_styles = document.createElement("link");
+			acm_styles.type = "text/css";
+			acm_styles.rel = "stylesheet";
+			acm_styles.media = "screen";
+			acm_styles.href = cssUrl;
+			acm_styles.id = "acm_web_cust_stylesheet";
+			document.head.append(acm_styles);
+		};
+		acm_injectStyles();
+	},"'" + chrome.extension.getURL("new.css") + "'");
+};
+
 var inject = function(code,func){
 	var s = document.createElement("script");
 	code = code || '';

@@ -59,7 +59,11 @@ a.chosen-single span{
 table tbody a:visited{
 	color:#a8a3ff !important;
 }
+nav.fixed-top{
+	height:3em;
+}
 #side_bottom {
+	top:3em;
 	background-color:rgba(34,34,34,0.7) !important;
 }
 .span_button {
@@ -135,11 +139,11 @@ button.ui-button:hover{
 	color:#eaeaea !important;
 	background:#1a1a1a !important;
 }
-.labels {
+/*.labels {
     color: #6c0fc2;
     background-color: rgba(255,255,255,0.7);
     font-size: 9.5px;
-}
+}*/
 .bg-primary {
-	background-color: #000000 !important;
+	background-color: #1a1a1a !important;
 }
