@@ -27,6 +27,10 @@ var improvements = function(){
 			console.info("Colour for :",earfcn);
 			var base = ["C70039","581845","FFC300","6C3483","229954","2874A6","117A65","18BC9C","e83e8c","660011"];
 			
+			if (typeof window.acm_sectColours[window.netType] !== "object"){
+				window.acm_sectColours[window.netType] = {};
+			}
+			
 			// Pick random colour from list as default
 			if (typeof window.acm_sectColours[window.netType][earfcn] !== "string"){
 				window.acm_sectColours[window.netType][earfcn] = base[Math.floor(Math.random()*base.length)];
