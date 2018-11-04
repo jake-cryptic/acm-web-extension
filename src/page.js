@@ -284,8 +284,16 @@ var improvements = function(){
 				"longitude":a.get("longitude"),
 				"zoom":a.get("zoom")
 			};
-			var name = prompt("Name this location:");
+			var name = prompt("Name this location (24 char max):");
 			if (name){
+				if (name.includes("<") || name.includes(">")){
+					alert("Name cannot include > or < characters");
+					return;
+				}
+				if (name.length > 24){
+					alert("Name cannot be longer than 24 characters");
+					return;
+				}
 				window.acm_userLocations.locations[name] = dataSet;
 				acm_saveUserData("locdata-v01");
 				acm_reloadSavedLocsUi();
@@ -321,11 +329,45 @@ var improvements = function(){
 			var list = $("<div/>",{"id":"acm_locations_list"});
 			var keys = Object.keys(window.acm_userLocations.locations);
 			for (var i = 0, l = keys.length;i<l;i++){
+				var d = window.acm_userLocations.locations[keys[i]];
 				list.append(
-					$("<a/>",{
-						"href":buildLocUrl(window.acm_userLocations.locations[keys[i]]),
-						"style":"font-size:1.4em"
-					}).text(keys[i])
+					$("<div/>",{
+						"data-href":buildLocUrl(d),
+						"data-identifier":keys[i],
+						"style":"padding:2px 1px;font-size:1.3em;"
+					}).append(
+						$("<span/>",{
+							"title":d["mcc"] + "-" + d["mnc"] + "-" + d["type"]
+						}).text(keys[i]),
+						$("<span/>").text(" - "),
+						$("<a/>",{"href":"#"}).on("click enter",function(){
+							window.location.href = $(this).parent().data("href");
+						}).text("[Go]"),
+						$("<span/>").text(" "),
+						$("<a/>",{"href":"#"}).on("click enter",function(){
+							var d = window.acm_userLocations.locations[$(this).parent().data("identifier")];
+							
+							var text = "<h2>" + $(this).parent().data("identifier") + "</h2>";
+							text += "<br /><strong>MCC: </strong>" + d["mcc"];
+							text += "<br /><strong>MNC: </strong>" + d["mnc"];
+							text += "<br /><strong>Type: </strong>" + d["type"];
+							text += "<br /><strong>Latitude: </strong>" + d["latitude"];
+							text += "<br /><strong>Longitude: </strong>" + d["longitude"];
+							text += "<br /><strong>Link: </strong><input type='text' readonly value='" + $(this).parent().data("href")+"' />";
+							
+							var realDiv = $("<div>");
+							realDiv.append(text);
+							realDiv.prop('title', 'Awesome CellMapper');
+							bootbox.alert(text);
+							window.location.hash = "#";
+						}).text("[Info]"),
+						$("<span/>").text(" "),
+						$("<a/>",{"href":"#"}).on("click enter",function(){
+							delete window.acm_userLocations.locations[$(this).parent().data("identifier")];
+							acm_saveUserData("locdata-v01");
+							acm_reloadSavedLocsUi();
+						}).text("[Delete]")
+					)
 				);
 			}
 			

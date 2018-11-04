@@ -49,6 +49,10 @@ a{
 	color:#13a8ff;
 	font-style: italic !important;
 }
+a:hover{
+	color:#0080cb;
+	font-weight:200;
+}
 a.chosen-single span{
 	font-style:none !important;
 }
@@ -148,5 +152,5 @@ button.ui-button:hover{
 	background-color: #1a1a1a !important;
 }
 #copyright, .gmnoprint{
-	opacity:0.5 !important;
+	opacity:0.8 !important;
 }
