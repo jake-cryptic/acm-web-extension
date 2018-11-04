@@ -147,3 +147,6 @@ button.ui-button:hover{
 .bg-primary {
 	background-color: #1a1a1a !important;
 }
+#copyright, .gmnoprint{
+	opacity:0.5 !important;
+}

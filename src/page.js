@@ -54,6 +54,7 @@ var improvements = function(){
 			var d = [
 				localStorage.getItem("colordata-v01"),
 				localStorage.getItem("userdata-v01"),
+				localStorage.getItem("locdata-v01"),
 			];
 			
 			if (d[0] === null || d[0].length <= 2) {
@@ -67,11 +68,17 @@ var improvements = function(){
 			} else {
 				window.acm_userSettings = JSON.parse(d[1]);
 			}
+			
+			if (d[2] === null || d[2].length <= 2) {
+				acm_saveUserData("locdata-v01");
+			} else {
+				window.acm_userLocations = JSON.parse(d[2]);
+			}
+			
 			window.MD5 = acm_pickColours;
 		};
 		var acm_saveUserData = function(only){
 			if (!only) var only = "all";
-			
 			
 			if (typeof window.acm_sectColours !== "object" && (only === "colordata-v01" || only === "all")) {
 				window.acm_sectColours = {
@@ -267,6 +274,24 @@ var improvements = function(){
 			).insertAfter("#accountTable");
 		};
 		
+		var acm_saveNewLocation = function(){
+			var a = new URLSearchParams(location.search);
+			var dataSet = {
+				"mcc":a.get("MCC"),
+				"mnc":a.get("MNC"),
+				"type":a.get("type"),
+				"latitude":a.get("latitude"),
+				"longitude":a.get("longitude"),
+				"zoom":a.get("zoom")
+			};
+			var name = prompt("Name this location:");
+			if (name){
+				window.acm_userLocations.locations[name] = dataSet;
+				acm_saveUserData("locdata-v01");
+				acm_reloadSavedLocsUi();
+			}
+		};
+		
 		var acm_reloadSavedLocsUi = function(){
 			var x = $("#acm_saved_locations");
 			x.empty();
@@ -277,15 +302,31 @@ var improvements = function(){
 			}
 			x.append(
 				$("<h4/>").text("Saved Locations"),
-				$("<button/>").on("click enter",function(){
-					
-				}).text("Save this location")
+				$("<button/>").on("click enter",acm_saveNewLocation).text("Save this location"),
+				$("<button/>").on("click enter",acm_reloadSavedLocsUi).text("Reload List")
 			);
+			
+			var buildLocUrl = function(data){
+				var r = "https://www.cellmapper.net/map";
+				r += "?MCC=" + data["mcc"];
+				r += "&MNC=" + data["mnc"];
+				r += "&type=" + data["type"];
+				r += "&latitude=" + data["latitude"];
+				r += "&longitude=" + data["longitude"];
+				r += "&zoom=" + data["zoom"];
+				r += "#loadedlocation";
+				return r;
+			};
 			
 			var list = $("<div/>",{"id":"acm_locations_list"});
 			var keys = Object.keys(window.acm_userLocations.locations);
 			for (var i = 0, l = keys.length;i<l;i++){
-				console.log(window.acm_userLocations.locations[keys[i]]);
+				list.append(
+					$("<a/>",{
+						"href":buildLocUrl(window.acm_userLocations.locations[keys[i]]),
+						"style":"font-size:1.4em"
+					}).text(keys[i])
+				);
 			}
 			
 			x.append(list);
@@ -294,7 +335,7 @@ var improvements = function(){
 		var acm_initialiseLocationSaver = function(){
 			$("#locsearch thead tr td").text("Map Locations");
 			$("#locsearch tbody").append(
-				$("<tr/>",{"id":"acm_saved_locations"}).text("Loading Saved Locations...")
+				$("<tr/>",{"id":"acm_saved_locations","style":"text-align:center"}).text("Loading Saved Locations...")
 			);
 			acm_reloadSavedLocsUi();
 		};
@@ -344,11 +385,12 @@ var improvements = function(){
 			$("#notes").hide();
 			$("#toast").text("[AwesomeCM]: Loaded!").fadeIn(200).delay(2000).slideUp(450);
 			$("nav.navbar").css("background","#1a1a1a !important");
-			//acm_initialiseLocationSaver();
+			acm_initialiseLocationSaver();
 			acm_initialiseColourData();
 			acm_initialiseColourSelector();
 			acm_toggleTopBar();
 			acm_collapseAll();
+			acm_reloadSavedLocsUi();
 			if(window.location.hash && window.location.hash === "#newinstall") {acm_welcomeMsg();}
 		}
 	},null);
