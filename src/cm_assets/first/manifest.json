@@ -1,0 +1,21 @@
+{
+	"dir": "ltr",
+    "name": "Cellular Coverage and Tower Map",
+	"lang": "en",
+    "scope": "/",
+    "display": "standalone",
+    "start_url": "./",
+    "short_name": "CellMapper",
+    "theme_color": "#2C3E50",
+    "description": "CellMapper is a crowd-sourced cellular tower and coverage mapping service.",
+    "orientation": "any",
+    "background_color": "transparent",
+    "related_applications": [],
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "https://www.cellmapper.net/images/logo.png",
+            "sizes": "32x32"
+        }
+    ]
+}

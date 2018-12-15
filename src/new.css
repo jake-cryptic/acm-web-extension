@@ -22,6 +22,8 @@ table thead:hover {
 table thead tr td, table thead tr th {
 	font-size:1.2em !important;
 }
+.table-sm tbody tr td:nth-child(2){font-weight:bold !important;}
+.table-sm tbody tr {text-align:center !important;}
 .table-striped tbody tr:nth-of-type(odd) {
 	background-color:rgba(45,45,45,0.6) !important;
 	color: #ffffff !important;
