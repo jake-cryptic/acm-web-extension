@@ -12,7 +12,7 @@ var assets = {
 	
 	firstParty:{
 		// Site Files
-		'/manifest.json':'cm_assets/first/manifest.json',
+		'/manifest.json':'cm_assets/first/cm_manifest.json',
 		'/css/bootstrap-style.css':'cm_assets/first/bootstrap-style.css',
 		'/js/markerwithlabel_1.2.1.js':'cm_assets/first/markerwithlabel_1.2.1.js',
 		'/js/markerclusterer_compiled.js':'cm_assets/first/markerclusterer_compiled.js',
