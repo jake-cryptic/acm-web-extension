@@ -22,16 +22,11 @@
 		"64": "ext_assets/acm_64.png"
 	},
 	"permissions": [
-	  	"activeTab",
 		"storage",
 	  	"tabs",
 		"webRequest",
 		"webRequestBlocking",
-		"*://*.cellmapper.net/*",
-		"*://*.googleapis.com/*",
-		"*://cdnjs.cloudflare.com/*",
-		"*://use.fontawesome.com/*",
-		"*://*.github.io/*"
+		"<all_urls>"
 	],
 	"background": {
 		"scripts": [
