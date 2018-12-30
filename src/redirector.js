@@ -25,7 +25,7 @@ var assets = {
 	},
 	thirdParty:{
 		// Redirect this to google...
-		'https://www.google.com/recaptcha/api.js':'https://www.google.com/recaptcha/api.js',
+		//'https://www.google.com/recaptcha/api.js':'https://www.google.com/recaptcha/api.js',
 		
 		// All internal redirects
 		'https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js':'cm_assets/third/jquery.min.js',
@@ -86,6 +86,10 @@ var webListener = function(){
 				console.log(url);
 				
 			} else {
+				
+				if (!details.initiator) return;
+				var init = new URL(details.initiator);
+				if (!init.host.includes("cellmapper.net")) return;
 				
 				if (settings.cacheSettings.thirdParty !== true) return;
 				
